@@ -1,0 +1,8 @@
+<component name="ProjectRunConfigurationManager">
+  <configuration default="false" name="IdentityServer &amp; Api" type="CompoundRunConfigurationType">
+    <toRun name="01. IdentityServer" type="DotNetProject" />
+    <toRun name="02. Api" type="DotNetProject" />
+    <toRun name="03. WebClient" type="DotNetProject" />
+    <method v="2" />
+  </configuration>
+</component>
