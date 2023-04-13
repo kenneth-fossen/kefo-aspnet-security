@@ -1,9 +1,11 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-
 namespace SecureApi.Controllers;
 
 [ApiController]
 [Route("[controller]")]
+[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+
 public class WeatherForecastController : ControllerBase
 {
     private static readonly string[] Summaries = new[]
@@ -18,9 +20,13 @@ public class WeatherForecastController : ControllerBase
         _logger = logger;
     }
 
+    [Authorize(Policy = "ConsoleClientRole")]
     [HttpGet(Name = "GetWeatherForecast")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
     public IEnumerable<WeatherForecast> Get()
     {
+        _logger.LogInformation("Get WeatherForecast");
         return Enumerable.Range(1, 5).Select(index => new WeatherForecast
         {
             Date = DateTime.Now.AddDays(index),
