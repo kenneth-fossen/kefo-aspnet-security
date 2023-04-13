@@ -119,10 +119,4 @@ fabric.properties
 
 # End of https://www.toptal.com/developers/gitignore/api/intellij+all,dotnetcore,visualstudiocode
 
-part-I/.idea/.idea.Duende.QuickStart/.idea/sonarlint/issuestore/index.pb
-
-part-I/.idea/.idea.Duende.QuickStart/.idea/sonarlint/securityhotspotstore/index.pb
-
-part-I/IdentityServer/keys/
-
-part-I/.idea/.idea.Duende.QuickStart/.idea/
+**/**/.idea/
