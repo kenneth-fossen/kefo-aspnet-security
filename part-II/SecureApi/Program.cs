@@ -8,6 +8,7 @@ using SecureApi.Requirements;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 builder.Services.AddScoped<IClaimsTransformation, SecuredApiTransformClaims>();
 builder.Services.AddSingleton<IAuthorizationHandler, HasFlagHandler>();
@@ -17,7 +18,6 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
 const string jwtBearerScheme = "Bearer";
-
 
 builder.Services
     .AddAuthentication(options =>
@@ -63,6 +63,12 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
+app.UseCors(opt =>
+{
+    opt.AllowAnyHeader();
+    opt.AllowCredentials();
+    opt.WithOrigins("http://localhost:5173");
+});
 app.UseHttpsRedirection();
 
 app.UseAuthentication();
