@@ -501,27 +501,31 @@ https://web.application.domain/login#
 <!-- _footer: Manning: Microservice Security in Action -->
 ---
 
-```sh
-GET  https://localhost:8085/oauth/authorize?
-           response_type=code&
-           client_id=application_id&
-           redirect_uri=https%3A%2F%2Fweb.application.domain%2Flogin
+```hs
+// Line breaks for legibility only
+
+https://login.microsoftonline.com/{tenant}/oauth2/v2.0/authorize?
+client_id=6731de76-14a6-49ae-97bc-6eba6914391e
+&response_type=code
+&redirect_uri=http%3A%2F%2Flocalhost%2Fmyapp%2F
+&response_mode=query
+&scope=https%3A%2F%2Fgraph.microsoft.com%2Fmail.read
+&state=12345
+&code_challenge=YTFjNjI1OWYzMzA3MTI4ZDY2Njg5M2RkNmVjNDE5YmEyZGRhOGYyM2IzNjdmZWFhMTQ1ODg3NDcxY2Nl
+&code_challenge_method=S256
 ```
 
 ```hs
-Location: https://web.application.domain/login?code=hus83nn-8ujq6-7snuelq
+Location: http://localhost/myapp/?code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq..
 ```
 
-```sh
-\> curl \
--u application1:application1secret \
--H "Content-Type: application/x-www-form-urlencoded" \
--d "grant_type=authorization_code&
-   code=hus83nn-8ujq6-7snuelq&
-   redirect_uri=https%3A%2F%2Fweb.application.domain%2Flogin" \
-https://localhost:8085/oauth/token
+```hs
+GET http://localhost?
+code=AwABAAAAvPM1KaPlrEqdFSBzjqfTGBCmLdgfSTLEMPGYuNHSUYBrq...
+&state=12345
 ```
 
+<!-- _footer: https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-auth-code-flow -->
 ---
 
 # AzureAd
