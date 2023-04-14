@@ -189,15 +189,18 @@ drwxr-xr-x  153 kenneth  staff 4896 Apr  5 10:48 .. # partent directory
 
 ![bg right:50% 100%](assets/abac-1.png)
 <!-- _footer: 'https://privacera.com/blog/what-is-attribute-based-access-control/' -->
+
+
+---
+<!-- _class: white -->
+# ABAC Infrastructure
+
+![bg right:50% 80%](assets/abac-arch.png)
+
 - Policy Decision Point (PDP)
 - Policy Enforcement Point (PEP)
 - Policy Information Point (PIP)
-
----
-<!-- _class: center-white -->
-# ABAC Infrastructure
-
-![h:450px](assets/abac-arch.png)
+- Policy Administration Point (PAP)
 
 <!-- _footer: https://fallbackstatus.com/what-is-attribute-based-access-control/ -->
 
@@ -219,6 +222,11 @@ drwxr-xr-x  153 kenneth  staff 4896 Apr  5 10:48 .. # partent directory
 # Risk-Based Authentication
 
 [https://riskbasedauthentication.org/](https://riskbasedauthentication.org/)
+
+---
+
+![bg contain](assets/rba_low.svg)
+![bg contain](assets/rba_high.svg)
 
 ---
 
@@ -342,6 +350,11 @@ app.Run();
 
 ---
 
+![](assets/middleware-pipeline.svg)
+
+
+---
+
 # [Authorize] and Policies
 
 ```hs
@@ -392,6 +405,7 @@ builder.Services.AddAuthorization(options =>
 # OAuth
 
 - What is OAuth
+- OpenID
 ![bg right:50% 100%](assets/oauth-maze.png)
 
 <!-- _footer: 'Source: https://aaronparecki.com/2019/12/12/21/its-time-for-oauth-2-dot-1' -->
@@ -446,15 +460,28 @@ builder.Services.AddAuthorization(options =>
 - Implicit Grant Flow
 - Authorization Code Grant (PCKE)
 
---- 
+---
 
 # Implicit Grant Flow
-
 
 ![bg right:60% 100%](assets/APPA_F07_Siriwardena.png)
 
 <!-- _fotter: https://learn.microsoft.com/en-us/azure/active-directory/develop/v2-oauth2-implicit-grant-flow >
 <!-- _footer: Manning: Microservice Security in Action -->
+
+---
+
+```sh
+GET https://localhost:8085/oauth/authorize?
+           response_type=token& #request type
+           client_id=application_id&
+           redirect_uri=https%3A%2F%2Fweb.application.domain%2Flogin
+```
+```
+https://web.application.domain/login#
+      access_token=jauej28slah2&
+      expires_in=3599
+```
 
 ---
 
@@ -474,6 +501,29 @@ builder.Services.AddAuthorization(options =>
 <!-- _footer: Manning: Microservice Security in Action -->
 ---
 
+```sh
+GET  https://localhost:8085/oauth/authorize?
+           response_type=code&
+           client_id=application_id&
+           redirect_uri=https%3A%2F%2Fweb.application.domain%2Flogin
+```
+
+```hs
+Location: https://web.application.domain/login?code=hus83nn-8ujq6-7snuelq
+```
+
+```sh
+\> curl \
+-u application1:application1secret \
+-H "Content-Type: application/x-www-form-urlencoded" \
+-d "grant_type=authorization_code&
+   code=hus83nn-8ujq6-7snuelq&
+   redirect_uri=https%3A%2F%2Fweb.application.domain%2Flogin" \
+https://localhost:8085/oauth/token
+```
+
+---
+
 # AzureAd
 
 - Service Principals / AppRegistrations
@@ -481,6 +531,7 @@ builder.Services.AddAuthorization(options =>
    Users have to manage secrets and passwords
 - Managed Identity
    Same as a service principal, just managed
+- Users
 
 ---
 
