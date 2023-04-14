@@ -1,17 +1,14 @@
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.Identity.Web;
 using SecureApi;
 using SecureApi.ClaimsTransform;
-using SecureApi.Requirements;
 
 var builder = WebApplication.CreateBuilder(args);
 
 
 // Add services to the container.
 builder.Services.AddScoped<IClaimsTransformation, SecuredApiTransformClaims>();
-builder.Services.AddSingleton<IAuthorizationHandler, HasFlagHandler>();
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
@@ -43,12 +40,18 @@ builder.Services.AddAuthorization(options =>
     });
     options.AddPolicy("HasFlagScope", policy =>
     {
-        policy.Requirements.Add(new HasFlag(SecureApiConstants.FlagName));
+        policy.Requirements.Add(new ScopeAuthorizationRequirement
+        {
+            RequiredScopesConfigurationKey = SecureApiConstants.FlagName
+        });
     });
 });
 
 builder.Services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 {
+    // Changes between mapping to XML or not,
+    // recommended not to map, due to complex manner of XML,
+    // and breaking the OpenID/OAuth conventional way.
     options.MapInboundClaims = true;
 });
 

@@ -24,7 +24,8 @@
       "launchBrowser": true,
       "launchUrl": "swagger",
       "environmentVariables": {
-        "ASPNETCORE_ENVIRONMENT": "Development"
+        "ASPNETCORE_ENVIRONMENT": "Development",
+        "SecretFlag": "This is not the secret ask: https://kefo-securedapi.azurewebsites.net"
       }
     }
   }
