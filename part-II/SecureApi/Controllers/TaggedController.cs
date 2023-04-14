@@ -1,9 +1,9 @@
+using System.Security.Claims;
 using Microsoft.AspNetCore.Mvc;
 
 namespace SecureApi.Controllers;
 
 [ApiController]
-[Route("[controller]")]
 [ProducesResponseType(StatusCodes.Status401Unauthorized)]
 public class TaggedController : ControllerBase
 {
@@ -13,10 +13,11 @@ public class TaggedController : ControllerBase
         _logger = logger;
     }
 
-    [HttpGet]
+    [HttpGet()]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    [Route("[controller]/")]
     public IActionResult Get()
     {
         _logger.LogInformation("Get Tagged");
@@ -32,7 +33,7 @@ public class TaggedController : ControllerBase
         return Ok($"tagged: {found.Value}");
     }
 
-    [HttpGet]
+    [HttpGet("[controller]/All")]
     [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -41,6 +42,7 @@ public class TaggedController : ControllerBase
         _logger.LogInformation("Get Tagged");
         var found = User
             .Claims
+            .Select( c => $"{c.Type}:{c.Value}")
             .ToList();
 
         if (!found.Any())
