@@ -1,11 +1,11 @@
 # Part ii - Readme
 
-In this Solution you will find two clients and a "Secured" Api.
+In this Solution, you will find two clients and a "Secured" Api.
 
 The secured API is running also in Azure on the following address:
 `https://kefo-securedapi.azurewebsites.net`
 
-But I have provided you with the sourcecode so you can write 
+But I have provided you with the source code so you can write 
 a client that speaks to the Secured API Endpoints.
 
 ## Challenges
@@ -22,7 +22,7 @@ Tips: start by investigating `appsettings.json`.
 
 ### WebClient
 
-Your task is to fetch the Flag/Secret value, and get it to show in the WebClient.
+Your task is to fetch the Flag/Secret value and get it to show in the WebClient.
 The secret flag is only on `https://kefo-securedapi.azurewebsites.net`,
 but it is a good idea to test and work with the solution to make it work locally.
 
@@ -42,7 +42,7 @@ one that you need to configure and implement.
 The library you are using is MSAL.js
 Good starting place could be: https://github.com/AzureAD/microsoft-authentication-library-for-js/wiki/Samples
 
-user: boisy@fossenkennethgmail.onmicrosoft.com 
+user: boisy@fossenkennethgmail.onmicrosoft.com
 password: FagdagAccessControl2023
 
 ## Open Tasks
