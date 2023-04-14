@@ -350,6 +350,11 @@ app.Run();
 
 ---
 
+![](assets/middleware-pipeline.svg)
+
+
+---
+
 # [Authorize] and Policies
 
 ```hs
