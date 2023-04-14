@@ -31,4 +31,23 @@ public class TaggedController : ControllerBase
 
         return Ok($"tagged: {found.Value}");
     }
+
+    [HttpGet]
+    [ProducesResponseType(StatusCodes.Status200OK)]
+    [ProducesResponseType(StatusCodes.Status404NotFound)]
+    [ProducesResponseType(StatusCodes.Status403Forbidden)]
+    public IActionResult GetAll()
+    {
+        _logger.LogInformation("Get Tagged");
+        var found = User
+            .Claims
+            .ToList();
+
+        if (!found.Any())
+        {
+            return NotFound();
+        }
+
+        return Ok(found);
+    }
 }

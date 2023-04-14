@@ -49,6 +49,9 @@ builder.Services.AddAuthorization(options =>
 
 builder.Services.Configure<JwtBearerOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
 {
+    // Changes between mapping to XML or not,
+    // recommended not to map, due to complex manner of XML,
+    // and breaking the OpenID/OAuth conventional way.
     options.MapInboundClaims = true;
 });
 

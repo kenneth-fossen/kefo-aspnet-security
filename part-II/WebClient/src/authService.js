@@ -20,16 +20,13 @@ class AuthService {
         return !!this.getUser();
     }
 
-    signIn() {
-    
-    }
+    signIn() {}
 
     getUser() {
         return this.pca.getActiveAccount();
     }
 
-    acquireToken() {
-    }
+    acquireToken() {}
 }
 
 export default AuthService;
