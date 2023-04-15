@@ -119,8 +119,8 @@ one that you need to configure and implement.
 The library you are using is MSAL.js
 Good starting place could be: https://github.com/AzureAD/microsoft-authentication-library-for-js/wiki/Samples
 
-user: boisy@fossenkennethgmail.onmicrosoft.com
-password: FagdagAccessControl2023
+user: <username>
+password: <password>
 
 ## Open Tasks
 
